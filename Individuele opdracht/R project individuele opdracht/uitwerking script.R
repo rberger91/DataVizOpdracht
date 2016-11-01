@@ -46,17 +46,29 @@ ui <- dashboardPage(
   
   
   sidebar <- dashboardSidebar(
-    
+    sidebarMenu(
+      menuItem("Welcome page", tabName = "welcome page",icon = icon("comment")),
+      menuItem("Dashoard", tabName = "dashboard", icon = icon("dashboard"), badgeLabel = "new", badgeColor = "green")
+    )
     
   ),
   
   
   body <- dashboardBody(
+    tabItems(
+    tabItem(tabName = "welcome page", h2("informatie en uitleg hier")
+            ),
+    
+    tabItem(tabName = "dashboard", h2("hello")
+            )
     # fluidRow(
     #  box(plotOutput(outputId = "bpOperators")), 
     #  box(Output(outputId = "bpTypes"))
     # )
+    )
   ),
+  
+  
   dashboardPage(header, sidebar, body)
   
 )
