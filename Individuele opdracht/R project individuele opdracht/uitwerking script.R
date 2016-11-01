@@ -35,26 +35,46 @@ barplot(head(sort(table(ac_data$Type),decreasing = T), n = 10), ylim = c(0,350),
 
 
 library(shiny)
+library(shinydashboard)
 
-ui <- fluidPage(
-  plotOutput(outputId = "bpOperators"), 
-  plotOutput(outputId = "bpTypes")
+ui <- dashboardPage(
+ 
+  header <- dashboardHeader(title = "my test dashboard", dropdownMenu(type =  "messages",
+         messageItem(from = "Sales", message = "lekker oefenen")
+    )
+  ),
+  
+  
+  sidebar <- dashboardSidebar(
+    
+    
+  ),
+  
+  
+  body <- dashboardBody(
+    # fluidRow(
+    #  box(plotOutput(outputId = "bpOperators")), 
+    #  box(Output(outputId = "bpTypes"))
+    # )
+  ),
+  dashboardPage(header, sidebar, body)
+  
 )
 
 
   
 server <- function(input, output) {
-  output$bpOperators <- renderPlot({
-    par(mar=c(10,4,1,1))
-    barplot(head(sort(table(ac_data$Operator), decreasing = T), n = 10), ylim = c(0,200), col = "gray", las =2, main = 
-            "Top 10 crashed operators", xlab = "operators", ylab = "number of crashes", sub = "source: airplane crashes since 1908")
-      })
-  
-  output$bpTypes <-renderPlot({
-    par(mar=c(10,4,1,1))
-    barplot(head(sort(table(ac_data$Type),decreasing = T), n = 10), ylim = c(0,350), col = "lightgray", las = 3, main = 
-              "top 10 crashed types of airplanes")
-  })
+  # output$bpOperators <- renderPlot({
+  #  par(mar=c(10,4,1,1))
+  #   barplot(head(sort(table(ac_data$Operator), decreasing = T), n = 10), ylim = c(0,200), col = "gray", las =2, main = 
+  #           "Top 10 crashed operators", xlab = "operators", ylab = "number of crashes", sub = "source: airplane crashes since 1908")
+  #     })
+  # 
+  # output$bpTypes <-renderPlot({
+  #   par(mar=c(10,4,1,1))
+  #   barplot(head(sort(table(ac_data$Type),decreasing = T), n = 10), ylim = c(0,350), col = "lightgray", las = 3, main = 
+  #             "top 10 crashed types of airplanes")
+  # })
   
 }
 
