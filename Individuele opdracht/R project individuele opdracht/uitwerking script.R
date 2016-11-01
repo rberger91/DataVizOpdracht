@@ -42,10 +42,3 @@ server <- function(input, output) {}
 
 shinyApp(ui = ui, server = server)
 
-
-#hallo test test est 
-
-plot(1:40)
-
-#test 1 2 4 
-
