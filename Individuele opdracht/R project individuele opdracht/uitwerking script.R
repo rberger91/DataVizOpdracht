@@ -40,7 +40,7 @@ library(shinydashboard)
 ui <- dashboardPage(
  
   header <- dashboardHeader(title = "my test dashboard", dropdownMenu(type =  "messages",
-         messageItem(from = "Sales", message = "lekker oefenen")
+         messageItem(from = "Sales", message = "Final Case study of Data visualisation course")
     )
   ),
   
@@ -56,22 +56,26 @@ ui <- dashboardPage(
   
   body <- dashboardBody(
     tabItems(
-    tabItem(tabName = "welcome page", h2("informatie en uitleg hier")
-            ),
+    tabItem(tabName = "welcome page",
+            fluidRow(
+              box(title = "Welcome", solidHeader = T, status = "info", "blablablabla", br(), "blablabla", width = 12)
+              
+            )),
     
-    tabItem(tabName = "dashboard", h2("hello")
+    tabItem(tabName = "dashboard",
+            box(title = "Welcome", solidHeader = T, status = "info", "blablablabla", br(), "blablabla", width = 12))
             )
     # fluidRow(
     #  box(plotOutput(outputId = "bpOperators")), 
     #  box(Output(outputId = "bpTypes"))
     # )
-    )
-  ),
+    ),
+ 
   
   
   dashboardPage(header, sidebar, body)
   
-)
+),
 
 
   
