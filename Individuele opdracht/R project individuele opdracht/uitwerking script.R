@@ -75,7 +75,7 @@ ui <- dashboardPage(
   
   dashboardPage(header, sidebar, body)
   
-),
+)
 
 
   
