@@ -36,9 +36,19 @@ barplot(head(sort(table(ac_data$Type),decreasing = T), n = 10), ylim = c(0,350),
 
 library(shiny)
 
-ui <- fluidpage()
+ui <- fluidPage(
+  plotOutput(outputId = "bpOperators")
+)
+
+
   
-server <- function(input, output) {}
+server <- function(input, output) {
+  output$bpOperators <- renderPlot({
+    par(mar=c(10,4,1,1))
+    barplot(head(sort(table(ac_data$Type),decreasing = T), n = 10), ylim = c(0,350), col = "lightgray", las = 3)
+      })
+  
+}
 
 shinyApp(ui = ui, server = server)
 
