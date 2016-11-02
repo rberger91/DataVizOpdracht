@@ -40,31 +40,41 @@ library(shinydashboard)
 ui <- dashboardPage(
  
   header <- dashboardHeader(title = "my test dashboard", dropdownMenu(type =  "messages",
-         messageItem(from = "Sales", message = "Final Case study of Data visualisation course")
+         messageItem(from = "Sales", message = "Final Case study of Data visualisation course"),
+         messageItem(from = "Auteur", message = "created by Robbin Berger, 0817915")
     )
   ),
   
   
   sidebar <- dashboardSidebar(
     sidebarMenu(
-      menuItem("Welcome page", tabName = "welcome page",icon = icon("comment")),
+      menuItem("Welcome page", tabName = "welcome page",icon = icon("comment")
+               ),
+      
       menuItem("Dashoard", tabName = "dashboard", icon = icon("dashboard"), badgeLabel = "new", badgeColor = "green")
-    )
+      )
     
-  ),
+    )
+  )
   
   
   body <- dashboardBody(
     tabItems(
-    tabItem(tabName = "welcome page",
+    tabItem(tabName = "Welcome page",
             fluidRow(
               box(title = "Welcome", solidHeader = T, status = "info", "blablablabla", br(), "blablabla", width = 12)
               
             )),
     
     tabItem(tabName = "dashboard",
-            box(title = "Welcome", solidHeader = T, status = "info", "blablablabla", br(), "blablabla", width = 12))
+            fluidRow(
+              box(title = "Welcome", solidHeader = T, status = "info", "blablablabla", br(), "blablabla", width = 12)
+              ),
+            fluidRow(
+              box(title = "Plot 1", solidHeader = T, status = "success", plotOutput("output$Plot1" )  
             )
+            )
+    )
     # fluidRow(
     #  box(plotOutput(outputId = "bpOperators")), 
     #  box(Output(outputId = "bpTypes"))
@@ -91,7 +101,7 @@ server <- function(input, output) {
   #   barplot(head(sort(table(ac_data$Type),decreasing = T), n = 10), ylim = c(0,350), col = "lightgray", las = 3, main = 
   #             "top 10 crashed types of airplanes")
   # })
-  
+  output$Plot1 <- renderPlot(plot(1:40))
 }
 
 shinyApp(ui = ui, server = server)
