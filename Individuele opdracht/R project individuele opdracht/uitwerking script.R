@@ -22,29 +22,22 @@ tail(sort(table(ac_data$Type), decreasing = T), n = 10)
 
 #wat wil de beste man nou?  operators per type aircraft of beide los? 
 
-help("aggregate")
-agr_data <- (aggregate(ac_data$Type ~ ac_data$Operator , data = ac_data, FUN = length))
-head(sort(agr_data$`ac_data$Type`, decreasing = T))
+# help("aggregate")
+# agr_data <- (aggregate(ac_data$Type ~ ac_data$Operator , data = ac_data, FUN = length))
+# head(sort(agr_data$`ac_data$Type`, decreasing = T))
       #schiet niks op. bovenstaande is zelfde als de eerder uitgevoerde head 
 
+
+#verkennen van plot mogelijkheden
 barplot(head(sort(table(ac_data$Operator), decreasing = T), n = 10), ylim = c(0,200), col = "gray", las =2 )
 
 par(mar=c(10,4,1,1))
-barplot(head(sort(table(ac_data$Type),decreasing = T), n = 10), ylim = c(0,350), col = "lightgray", las = 3)
+barplot(head(sort(table(ac_data$Type),decreasing = T), n = 10), ylim = c(0,350), col = "lightgray", las = 2, 
+        main = "Aantal crashes per type vliegtuig", ylab = "aantal crashes", xlab = "type vliegtuig")
 
 
-
-library(shiny)
-
-ui <- fluidpage()
-  
-server <- function(input, output) {}
-
-shinyApp(ui = ui, server = server)
+help(par)
 
 
-#hallo test test est 
-
-plot(1:40)
 
 
