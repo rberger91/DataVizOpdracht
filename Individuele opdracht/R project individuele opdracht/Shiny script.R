@@ -1,5 +1,5 @@
-install.packages("shiny")
-install.packages("shinydashboard")
+#install.packages("shiny")
+#nstall.packages("shinydashboard")
 
 library(shiny)
 library(shinydashboard)
@@ -21,27 +21,30 @@ ui <- dashboardPage(
       menuItem("Dashoard", tabName = "dashboard", icon = icon("dashboard"), badgeLabel = "new", badgeColor = "green")
     )
     
-  )
-)
-
-
-body <- dashboardBody(
-  tabItems(
-    tabItem(tabName = "welcome page",
-            fluidRow(
-              box(title = "Welcome", solidHeader = T, status = "info", "blablablabla", br(), "blablabla", width = 6)
-              
-            )),
-    
-    tabItem(tabName = "dashboard",
-            fluidRow(
-              box(title = "Welcome", solidHeader = T, status = "info", "blablablabla", br(), "blablabla", width = 12)
-            ),
-            fluidRow(
-              box(title = "Plot 1", solidHeader = T, status = "success", sliderInput(inputId = "slider1",
-                   label = "kies het aantal operators", min = 0, max = 100, value = 10, ),plotOutput(outputId = "plot1")  
+  ),
+  
+  
+  
+  body <- dashboardBody(
+    tabItems(
+      tabItem(tabName = "welcome page",
+              fluidRow(
+                box(title = "Welcome", solidHeader = T, status = "info", "blablablabla", br(), "blablabla", width = 6)
+                
+              )),
+      
+      tabItem(tabName = "dashboard",
+              fluidRow(
+                box(title = "Welcome", solidHeader = T, status = "info", "blablablabla", br(), "blablabla", width = 12)
+              ),
+              fluidRow(
+                box(title = "Plot 1", solidHeader = T, status = "success", sliderInput(inputId = "slider1",
+                                                                                       label = "kies het aantal operators", min = 0, max = 100, value = 10 ),plotOutput(outputId = "plot1")  
+                )),
+              fluidRow(
+                box(plotOutput("plot2"), title = "plot 2", solidHeader = T)
               )
-            )
+      )
     )
     # fluidRow(
     #  box(plotOutput(outputId = "bpOperators")), 
@@ -72,7 +75,8 @@ server <- function(input, output) {
   
   
   output$plot1 <- renderPlot({
-    barplot(head(sort(table(ac_data$Operator), decreasing = T), n = 10), ylim = c(0,200), col = "gray", las =2 ) 
+    barplot(head(sort(table(ac_data$Operator), decreasing = T), n = 10), ylim = c(0,200), col = "gray", las =2 )
+    #hist(rnorm(1000), main = "hello world")
   })
 }
 

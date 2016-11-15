@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "#install.packages(\"shiny\")\n#nstall.packages(\"shinydashboard\")\n\nlibrary(shiny)\nlibrary(shinydashboard)\n\nui <- dashboardPage(\n  \n  header <- dashboardHeader(title = \"my test dashboard\", dropdownMenu(type =  \"messages\",\n                                                                      messageItem(from = \"Sales\", message = \"Final Case study of Data visualisation course\"),\n                                                                      messageItem(from = \"Auteur\", message = \"created by Robbin Berger, 0817915\")\n  )\n  ),\n  \n  \n  sidebar <- dashboardSidebar(\n    sidebarMenu(\n      menuItem(\"Welcome page\", tabName = \"welcome page\",icon = icon(\"comment\")\n      ),\n      \n      menuItem(\"Dashoard\", tabName = \"dashboard\", icon = icon(\"dashboard\"), badgeLabel = \"new\", badgeColor = \"green\")\n    )\n    \n  ),\n  \n  \n  \n  body <- dashboardBody(\n    tabItems(\n      tabItem(tabName = \"welcome page\",\n              fluidRow(\n                box(title = \"Welcome\", solidHeader = T, status = \"info\", \"blablablabla\", br(), \"blablabla\", width = 6)\n                \n              )),\n      \n      tabItem(tabName = \"dashboard\",\n              fluidRow(\n                box(title = \"Welcome\", solidHeader = T, status = \"info\", \"blablablabla\", br(), \"blablabla\", width = 12)\n              ),\n              fluidRow(\n                box(title = \"Plot 1\", solidHeader = T, status = \"success\", sliderInput(inputId = \"slider1\",\n                                                                                       label = \"kies het aantal operators\", min = 0, max = 100, value = 10 ),plotOutput(outputId = \"plot1\")  \n                )),\n              fluidRow(\n                box(plotOutput(\"plot2\"), title = \"plot 2\", solidHeader = T)\n              )\n      )\n    )\n    # fluidRow(\n    #  box(plotOutput(outputId = \"bpOperators\")), \n    #  box(Output(outputId = \"bpTypes\"))\n    # )\n  ),\n  \n  \n  \n  dashboardPage(header, sidebar, body)\n  \n)\n\n\n\nserver <- function(input, output) {\n  # output$bpOperators <- renderPlot({\n  #  par(mar=c(10,4,1,1))\n  #   barplot(head(sort(table(ac_data$Operator), decreasing = T), n = 10), ylim = c(0,200), col = \"gray\", las =2, main = \n  #           \"Top 10 crashed operators\", xlab = \"operators\", ylab = \"number of crashes\", sub = \"source: airplane crashes since 1908\")\n  #     })\n  # \n  # output$bpTypes <-renderPlot({\n  #   par(mar=c(10,4,1,1))\n  #   barplot(head(sort(table(ac_data$Type),decreasing = T), n = 10), ylim = c(0,350), col = \"lightgray\", las = 3, main = \n  #             \"top 10 crashed types of airplanes\")\n  # })\n  \n  \n  output$plot1 <- renderPlot({\n    barplot(head(sort(table(ac_data$Operator), decreasing = T), n = 10), ylim = c(0,200), col = \"gray\", las =2 )\n    #hist(rnorm(1000), main = \"hello world\")\n  })\n}\n\nshinyApp(ui = ui, server = server)",
+    "created" : 1479211221274.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "104484446",
+    "id" : "A21ED83C",
+    "lastKnownWriteTime" : 1479211241,
+    "last_content_update" : 1479211241240,
+    "path" : "~/GitHub/DataVizOpdracht/Individuele opdracht/R project individuele opdracht/Shiny script.R",
+    "project_path" : "Shiny script.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

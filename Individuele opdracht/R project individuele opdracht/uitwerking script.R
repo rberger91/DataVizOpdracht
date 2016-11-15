@@ -25,7 +25,7 @@ tail(sort(table(ac_data$Type), decreasing = T), n = 10)
 # help("aggregate")
 # agr_data <- (aggregate(ac_data$Type ~ ac_data$Operator , data = ac_data, FUN = length))
 # head(sort(agr_data$`ac_data$Type`, decreasing = T))
-      #schiet niks op. bovenstaande is zelfde als de eerder uitgevoerde head 
+#schiet niks op. bovenstaande is zelfde als de eerder uitgevoerde head 
 
 
 #verkennen van plot mogelijkheden
