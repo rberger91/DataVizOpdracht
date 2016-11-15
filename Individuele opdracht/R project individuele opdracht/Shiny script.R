@@ -6,7 +6,7 @@ library(shinydashboard)
 
 ui <- dashboardPage(
   
-  header <- dashboardHeader(title = "my test dashboard", dropdownMenu(type =  "messages",
+  header <- dashboardHeader(title = "Plane crash dashboard", dropdownMenu(type =  "messages",
                                                                       messageItem(from = "Sales", message = "Final Case study of Data visualisation course"),
                                                                       messageItem(from = "Auteur", message = "created by Robbin Berger, 0817915")
   )
@@ -15,9 +15,9 @@ ui <- dashboardPage(
   
   sidebar <- dashboardSidebar(
     sidebarMenu(
-      menuItem("Welcome page", tabName = "welcome page",icon = icon("comment")
-      ),
-      
+      # menuItem("Home page", tabName = "welcome page",icon = icon("comment")
+      # ),
+      # 
       menuItem("Dashoard", tabName = "dashboard", icon = icon("dashboard"), badgeLabel = "new", badgeColor = "green")
     )
     
@@ -27,22 +27,25 @@ ui <- dashboardPage(
   
   body <- dashboardBody(
     tabItems(
-      tabItem(tabName = "welcome page",
-              fluidRow(
-                box(title = "Welcome", solidHeader = T, status = "info", "blablablabla", br(), "blablabla", width = 6)
-                
-              )),
+      # tabItem(tabName = "Home page",
+      #         fluidRow(
+      #           box(title = "Welcome", solidHeader = T, status = "info", "blablablabla", br(), "blablabla", width = 6)
+      #           
+      #         )),
       
       tabItem(tabName = "dashboard",
               fluidRow(
-                box(title = "Welcome", solidHeader = T, status = "info", "blablablabla", br(), "blablabla", width = 12)
+                box(title = "Explanation", solidHeader = T, status = "info", "On this page you can see for boxes. the boxes on the left are the visualisations of the available data.", br(), "The boxes on the right provides the user the posibility to change the plots with the given controls", width = 12)
               ),
               fluidRow(
-                box(title = "Plot 1", solidHeader = T, status = "success", sliderInput(inputId = "slider1",
-                                                                                       label = "kies het aantal operators", min = 0, max = 100, value = 10 ),plotOutput(outputId = "plot1")  
-                )),
+                box(title = "Plot 1", solidHeader = T, status = "success",plotOutput(outputId = "plot1")  
+                ),
+                box(title = "plot 1 controls", solidHeader = T, status = "success", sliderInput(inputId = "slider1",
+                                          label = "Choose the number of operators", min = 5, max = 15, value = 10 ))
+                ),
               fluidRow(
-                box(plotOutput("plot2"), title = "plot 2", solidHeader = T)
+                box(plotOutput("plot2"), title = "plot 2", solidHeader = T, status = "success"),
+                box(title = "plot 2 controls", solidHeader = T, status = "success")
               )
       )
     )
@@ -72,6 +75,7 @@ server <- function(input, output) {
   #   barplot(head(sort(table(ac_data$Type),decreasing = T), n = 10), ylim = c(0,350), col = "lightgray", las = 3, main = 
   #             "top 10 crashed types of airplanes")
   # })
+  
   
   
   output$plot1 <- renderPlot({
