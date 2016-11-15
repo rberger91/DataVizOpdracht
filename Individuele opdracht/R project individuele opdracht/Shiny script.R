@@ -4,6 +4,9 @@
 library(shiny)
 library(shinydashboard)
 
+
+inputselection <- c("head","tail")
+
 ui <- dashboardPage(
   
   header <- dashboardHeader(title = "Plane crash dashboard", dropdownMenu(type =  "messages",
@@ -35,13 +38,15 @@ ui <- dashboardPage(
       
       tabItem(tabName = "dashboard",
               fluidRow(
-                box(title = "Explanation", solidHeader = T, status = "info", "On this page you can see for boxes. the boxes on the left are the visualisations of the available data.", br(), "The boxes on the right provides the user the posibility to change the plots with the given controls", width = 12)
+                box(title = "Explanation", solidHeader = T, status = "info", "On this page you can see for boxes. the boxes on the left are the visualisations of the available data.",
+                    br(), "The boxes on the right provides the user the posibility to change the plots with the given controls", width = 12)
               ),
               fluidRow(
-                box(title = "Plot 1", solidHeader = T, status = "success",plotOutput(outputId = "plot1")  
+                box(title = "Plot 1", solidHeader = T, status = "success",plotOutput(outputId = "plot1"                                      )  
                 ),
                 box(title = "plot 1 controls", solidHeader = T, status = "success", sliderInput(inputId = "slider1",
-                                          label = "Choose the number of operators", min = 5, max = 15, value = 10 ))
+                                          label = "Choose the number of operators", min = 5, max = 15, value = 10 ),
+                                          br(), selectInput(inputId = "select1", label = "choose dimension", choices = inputselection))
                 ),
               fluidRow(
                 box(plotOutput("plot2"), title = "plot 2", solidHeader = T, status = "success"),
@@ -79,8 +84,10 @@ server <- function(input, output) {
   
   
   output$plot1 <- renderPlot({
-    barplot(head(sort(table(ac_data$Operator), decreasing = T), n = 10), ylim = c(0,200), col = "gray", las =2 )
+    barplot(input$select1(sort(table(ac_data$Operator), decreasing = T), n = input$slider1), ylim = c(0,200), col = "light gray", las =2, main = "Number of crashes per aircraft type", 
+            ylab = "Number of crashes", xlab = "type of aircraft", sub = "source: www.bron.nl")
     #hist(rnorm(1000), main = "hello world")
+    #hier moet nog iets leuks gedaan worden met de par() om de labels goed leesbaar te maken
   })
 }
 
