@@ -43,15 +43,16 @@ ui <- dashboardPage(
               ),
               fluidRow(
                 box(title = "Plot 1", solidHeader = T, status = "success",plotOutput(outputId = "plot1"                                      )  
-                ),
+                , collapsible = T, collapsed = F),
                 box(title = "plot 1 controls", solidHeader = T, status = "success", sliderInput(inputId = "slider1",
                                           label = "Choose the number of operators", min = 5, max = 15, value = 10 ),
-                                          selectInput(inputId = "select1", label = "choose dimension", choices = inputselection
-                                          ))
+                                          selectInput(inputId = "select1", label = "choose dimension", choices = inputselection),
+                                          collapsible = T, collapsed = F
+                                          )
                 ),
               fluidRow(
-                box(plotOutput("plot2"), title = "plot 2", solidHeader = T, status = "success"),
-                box(title = "plot 2 controls", solidHeader = T, status = "success")
+                box(plotOutput("plot2"), title = "plot 2", solidHeader = T, status = "success", collapsed = T, collapsible = T),
+                box(title = "plot 2 controls", solidHeader = T, status = "success", collapsible = T, collapsed = T)
               )
       )
     )

@@ -1,7 +1,7 @@
 #What is the highest number ofcrashes by Operator and by Type of aircraft? 
 
 
-#beginnen met inladen en verkennen van het document 
+#beginnen met inladen en verkennen van de dataset
 
 ac_data <- read.csv("C:\\Users\\Robbin Berger\\Dropbox\\Hogeschool Rotterdam\\Minor Data Science\\Kwartaal 13\\DataViz\\Individuele opdracht\\AC1908.csv")
 head(ac_data)
@@ -20,7 +20,7 @@ tail(sort(table(ac_data$Operator), decreasing = T), n = 10)
 head(sort(table(ac_data$Type),decreasing = T), n = 10)
 tail(sort(table(ac_data$Type), decreasing = T), n = 10)
 
-#wat wil de beste man nou?  operators per type aircraft of beide los? 
+#Er zijn teveel operators met teveel type vliegtuigen om hier een nuttige visual van te maken.  
 
 # help("aggregate")
 # agr_data <- (aggregate(ac_data$Type ~ ac_data$Operator , data = ac_data, FUN = length))
