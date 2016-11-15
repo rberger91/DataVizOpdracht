@@ -46,7 +46,8 @@ ui <- dashboardPage(
                 ),
                 box(title = "plot 1 controls", solidHeader = T, status = "success", sliderInput(inputId = "slider1",
                                           label = "Choose the number of operators", min = 5, max = 15, value = 10 ),
-                                          br(), selectInput(inputId = "select1", label = "choose dimension", choices = inputselection))
+                                          br(), selectInput(inputId = "select1", label = "choose dimension", choices = inputselection, 
+                                                selected = inputselection[1]))
                 ),
               fluidRow(
                 box(plotOutput("plot2"), title = "plot 2", solidHeader = T, status = "success"),
@@ -54,10 +55,6 @@ ui <- dashboardPage(
               )
       )
     )
-    # fluidRow(
-    #  box(plotOutput(outputId = "bpOperators")), 
-    #  box(Output(outputId = "bpTypes"))
-    # )
   ),
   
   
@@ -81,14 +78,19 @@ server <- function(input, output) {
   #             "top 10 crashed types of airplanes")
   # })
   
-  
-  
-  output$plot1 <- renderPlot({
-    barplot(input$select1(sort(table(ac_data$Operator), decreasing = T), n = input$slider1), ylim = c(0,200), col = "light gray", las =2, main = "Number of crashes per aircraft type", 
-            ylab = "Number of crashes", xlab = "type of aircraft", sub = "source: www.bron.nl")
-    #hist(rnorm(1000), main = "hello world")
-    #hier moet nog iets leuks gedaan worden met de par() om de labels goed leesbaar te maken
-  })
+  if (input$select1 == "head") {
+    output$plot1 <- renderPlot({
+      barplot(head(sort(table(ac_data$Operator), decreasing = T), n = input$slider1), ylim = c(0,200), col = "light gray", las =2, main = "Number of crashes per aircraft type", 
+              ylab = "Number of crashes", xlab = "type of aircraft", sub = "source: www.bron.nl")
+      #hier moet nog iets leuks gedaan worden met de par() om de labels goed leesbaar te maken
+    })
+  } else { 
+    output$plot1 <- renderPlot({
+      barplot(tail(sort(table(ac_data$Operator), decreasing = T), n = input$slider1), ylim = c(0,200), col = "light gray", las =2, main = "Number of crashes per aircraft type", 
+              ylab = "Number of crashes", xlab = "type of aircraft", sub = "source: www.bron.nl")
+      #hier moet nog iets leuks gedaan worden met de par() om de labels goed leesbaar te maken
+    })
+  }
 }
 
 shinyApp(ui = ui, server = server)
