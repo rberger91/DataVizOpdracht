@@ -38,6 +38,7 @@ barplot(head(sort(table(ac_data$Type),decreasing = T), n = 10), ylim = c(0,350),
 
 help(par)
 
-
-
+edit(head(ac_data$Type))
+barplot(head(sort(table(ac_data$Type), decreasing = T), n = 10), ylim = c(0,200), col = "light gray", las =2, main = "Number of crashes per operator", 
+        ylab = "Number of crashes", xlab = "operator", sub = "source: https://goo.gl/aOpm1i")
 

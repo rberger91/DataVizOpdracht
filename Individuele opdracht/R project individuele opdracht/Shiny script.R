@@ -6,7 +6,7 @@ library(shinydashboard)
 
 #inladen van de data en aanmaken van de gebruikte variabelen.
 inputselection1 <- c("operators with most crashes","operators with least crashes")
-ac_data <- read.csv("C:\\Users\\Robbin Berger\\Dropbox\\Hogeschool Rotterdam\\Minor Data Science\\Kwartaal 13\\DataViz\\Individuele opdracht\\AC1908.csv")
+ac_data <- read.csv(paste(getwd(),"/../AC1908.csv", sep=""))
 
 
 ui <- dashboardPage(
@@ -64,7 +64,7 @@ ui <- dashboardPage(
   
   
   dashboardPage(header, sidebar, body)
-  
+    
 )
 
 server <- function(input, output) {
@@ -73,12 +73,16 @@ server <- function(input, output) {
       if (input$select1 == inputselection1[1]) {
       par(mar=c(10,4,1,1))
       barplot(head(sort(table(ac_data$Operator), decreasing = T), n = input$slider1), ylim = c(0,200), col = "light gray", las =2, main = "Number of crashes per operator", 
-              ylab = "Number of crashes", xlab = "operator", sub = "source: https://goo.gl/aOpm1i")
+              ylab = "Number of crashes")
+      mtext("operator", side = 1, line = 8)
+      mtext("source: https://goo.gl/aOpm1i", side =1 , line = 9)
       
 
   } else { 
       barplot(tail(sort(table(ac_data$Operator), decreasing = T), n = input$slider1), ylim = c(0,5), col = "light gray", las =2, main = "Number of crashes per operator", 
-              ylab = "Number of crashes", xlab = "operator", sub = "source: https://goo.gl/aOpm1i")
+              ylab = "Number of crashes")
+    mtext("operator", side = 1, line = 8)
+    mtext("source: https://goo.gl/aOpm1i", side =1 , line = 9)
 
     }
   })
