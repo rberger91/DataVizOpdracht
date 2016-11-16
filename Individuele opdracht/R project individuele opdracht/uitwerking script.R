@@ -1,6 +1,6 @@
 #What is the highest number ofcrashes by Operator and by Type of aircraft? 
 
-
+#dit script is gebruikt als 'oefen' file. de 'shiny script' moet alleen kunnen draaien. 
 #beginnen met inladen en verkennen van de dataset
 
 ac_data <- read.csv("C:\\Users\\Robbin Berger\\Dropbox\\Hogeschool Rotterdam\\Minor Data Science\\Kwartaal 13\\DataViz\\Individuele opdracht\\AC1908.csv")
@@ -20,7 +20,7 @@ tail(sort(table(ac_data$Operator), decreasing = T), n = 10)
 head(sort(table(ac_data$Type),decreasing = T), n = 10)
 tail(sort(table(ac_data$Type), decreasing = T), n = 10)
 
-#Er zijn teveel operators met teveel type vliegtuigen om hier een nuttige visual van te maken.  
+#Er zijn teveel operators met teveel type vliegtuigen om hier een nuttige crossvisual van te maken.  
 
 # help("aggregate")
 # agr_data <- (aggregate(ac_data$Type ~ ac_data$Operator , data = ac_data, FUN = length))

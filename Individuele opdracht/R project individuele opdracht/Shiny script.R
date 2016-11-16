@@ -4,12 +4,14 @@
 library(shiny)
 library(shinydashboard)
 
-
-inputselection <- c("head","tail")
+#inladen van de data en aanmaken van de gebruikte variabelen.
+inputselection1 <- c("operators with most crashes","operators with least crashes")
 ac_data <- read.csv("C:\\Users\\Robbin Berger\\Dropbox\\Hogeschool Rotterdam\\Minor Data Science\\Kwartaal 13\\DataViz\\Individuele opdracht\\AC1908.csv")
 
 
 ui <- dashboardPage(
+  
+  #het aanmaken van de header titel en het berichten menu. 
   
   header <- dashboardHeader(title = "Plane crash dashboard", titleWidth = 300, dropdownMenu(type =  "messages",
                                                                       messageItem(from = "Sales", message = "Final Case study of Data visualisation course"),
@@ -20,10 +22,10 @@ ui <- dashboardPage(
   
   sidebar <- dashboardSidebar(
     sidebarMenu(
-      # menuItem("Home page", tabName = "welcome page",icon = icon("comment")
-      # ),
-      # 
+     
+      menuItem("Information", tabName = "information", icon = icon("newspaper-o")),
       menuItem("Dashoard", tabName = "dashboard", icon = icon("dashboard"), badgeLabel = "new", badgeColor = "green")
+      
     )
     
   ),
@@ -32,7 +34,7 @@ ui <- dashboardPage(
   body <- dashboardBody(
     tabItems(
 
-      
+      #hieroder wordt de ui gemaakt voor de dashboardpagina. De rijen en de boxes, en de elementen die in de boxen getoond moeten worden. 
       tabItem(tabName = "dashboard",
               fluidRow(
                 box(title = "Explanation", solidHeader = T, status = "info", "On this page you can see for boxes. the boxes on the left are the visualisations of the available data.",
@@ -46,12 +48,17 @@ ui <- dashboardPage(
                                           selectInput(inputId = "select1", label = "choose dimension", choices = inputselection),
                                           collapsible = T, collapsed = F
                                           )
-                ),
+                )#,
+              # fluidRow(
+              #   box(plotOutput("plot2"), title = "plot 2", solidHeader = T, status = "success", collapsed = T, collapsible = T),
+              #   box(title = "plot 2 controls", solidHeader = T, status = "success", collapsible = T, collapsed = T)
+              # )
+      ),
+      tabItem(tabName = "information",
               fluidRow(
-                box(plotOutput("plot2"), title = "plot 2", solidHeader = T, status = "success", collapsed = T, collapsible = T),
-                box(title = "plot 2 controls", solidHeader = T, status = "success", collapsible = T, collapsed = T)
-              )
-      )
+                box(title = "hello, how are you?" , solidHeader = T, status = "info", "Dit is het product voor de eindopdracht van de cursus datavisualisatie van de minor DataScience aan de Hogeschool Rotterdam.",
+                    br(), "rechtsboven vind u informatie over de auteur", br(), "Links kunt u op menu item Dashboard klikken om de visualitatie te zien")
+              ))
     )
   ),
   
@@ -63,7 +70,7 @@ ui <- dashboardPage(
 server <- function(input, output) {
 
     output$plot1 <- renderPlot({
-      if (input$select1 == "head") {
+      if (input$select1 == inputselection1[1]) {
       par(mar=c(10,4,1,1))
       barplot(head(sort(table(ac_data$Operator), decreasing = T), n = input$slider1), ylim = c(0,200), col = "light gray", las =2, main = "Number of crashes per operator", 
               ylab = "Number of crashes", xlab = "operator", sub = "source: https://goo.gl/aOpm1i")
@@ -72,9 +79,11 @@ server <- function(input, output) {
   } else { 
       barplot(tail(sort(table(ac_data$Operator), decreasing = T), n = input$slider1), ylim = c(0,5), col = "light gray", las =2, main = "Number of crashes per operator", 
               ylab = "Number of crashes", xlab = "operator", sub = "source: https://goo.gl/aOpm1i")
-      #hier moet nog iets leuks gedaan worden met de par() om de labels goed leesbaar te maken
+
     }
   })
+    
+    
   }
 
 shinyApp(ui = ui, server = server)
