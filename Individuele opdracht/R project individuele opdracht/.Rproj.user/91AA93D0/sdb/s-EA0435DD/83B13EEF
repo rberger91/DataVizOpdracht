@@ -1,14 +1,14 @@
 {
     "collab_server" : "",
-    "contents" : "#What is the highest number ofcrashes by Operator and by Type of aircraft? \n\n\n#beginnen met inladen en verkennen van het document \n\nac_data <- read.csv(\"C:\\\\Users\\\\Robbin Berger\\\\Dropbox\\\\Hogeschool Rotterdam\\\\Minor Data Science\\\\Kwartaal 13\\\\DataViz\\\\Individuele opdracht\\\\AC1908.csv\")\nhead(ac_data)\nnrow(ac_data)\nncol(ac_data)\nstr(ac_data)\nsum(is.na(ac_data$Operator))\nsum(is.na(ac_data$Type))\n\nopers <- levels(ac_data$Operator) #2477 operators\ntypes <- levels(ac_data$Type)  #2447 types of flying objects..\n\nhead(sort(table(ac_data$Operator), decreasing = T), n = 10) \ntail(sort(table(ac_data$Operator), decreasing = T), n = 10) \n\nhead(sort(table(ac_data$Type),decreasing = T), n = 10)\ntail(sort(table(ac_data$Type), decreasing = T), n = 10)\n\n#wat wil de beste man nou?  operators per type aircraft of beide los? \n\n# help(\"aggregate\")\n# agr_data <- (aggregate(ac_data$Type ~ ac_data$Operator , data = ac_data, FUN = length))\n# head(sort(agr_data$`ac_data$Type`, decreasing = T))\n      #schiet niks op. bovenstaande is zelfde als de eerder uitgevoerde head \n\n\n#verkennen van plot mogelijkheden\nbarplot(head(sort(table(ac_data$Operator), decreasing = T), n = 10), ylim = c(0,200), col = \"gray\", las =2 )\n\npar(mar=c(10,4,1,1))\nbarplot(head(sort(table(ac_data$Type),decreasing = T), n = 10), ylim = c(0,350), col = \"lightgray\", las = 2, \n        main = \"Aantal crashes per type vliegtuig\", ylab = \"aantal crashes\", xlab = \"type vliegtuig\")\n\n\nhelp(par)\n\n\n\n\n",
+    "contents" : "#What is the highest number ofcrashes by Operator and by Type of aircraft? \n\n\n#beginnen met inladen en verkennen van de dataset\n\nac_data <- read.csv(\"C:\\\\Users\\\\Robbin Berger\\\\Dropbox\\\\Hogeschool Rotterdam\\\\Minor Data Science\\\\Kwartaal 13\\\\DataViz\\\\Individuele opdracht\\\\AC1908.csv\")\nhead(ac_data)\nnrow(ac_data)\nncol(ac_data)\nstr(ac_data)\nsum(is.na(ac_data$Operator))\nsum(is.na(ac_data$Type))\n\nopers <- levels(ac_data$Operator) #2477 operators\ntypes <- levels(ac_data$Type)  #2447 types of flying objects..\n\nhead(sort(table(ac_data$Operator), decreasing = T), n = 10) \ntail(sort(table(ac_data$Operator), decreasing = T), n = 10) \n\nhead(sort(table(ac_data$Type),decreasing = T), n = 10)\ntail(sort(table(ac_data$Type), decreasing = T), n = 10)\n\n#Er zijn teveel operators met teveel type vliegtuigen om hier een nuttige visual van te maken.  \n\n# help(\"aggregate\")\n# agr_data <- (aggregate(ac_data$Type ~ ac_data$Operator , data = ac_data, FUN = length))\n# head(sort(agr_data$`ac_data$Type`, decreasing = T))\n#schiet niks op. bovenstaande is zelfde als de eerder uitgevoerde head \n\n\n#verkennen van plot mogelijkheden\nbarplot(head(sort(table(ac_data$Operator), decreasing = T), n = 10), ylim = c(0,200), col = \"gray\", las =2 )\n\npar(mar=c(10,4,1,1))\nbarplot(head(sort(table(ac_data$Type),decreasing = T), n = 10), ylim = c(0,350), col = \"lightgray\", las = 2, \n        main = \"Aantal crashes per type vliegtuig\", ylab = \"aantal crashes\", xlab = \"type vliegtuig\")\n\n\nhelp(par)\n\n\n\n\n",
     "created" : 1478426848744.000,
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "1173234541",
+    "hash" : "164280315",
     "id" : "83B13EEF",
-    "lastKnownWriteTime" : 1478812232,
-    "last_content_update" : 1478812232118,
+    "lastKnownWriteTime" : 1479216579,
+    "last_content_update" : 1479216579,
     "path" : "~/GitHub/DataVizOpdracht/Individuele opdracht/R project individuele opdracht/uitwerking script.R",
     "project_path" : "uitwerking script.R",
     "properties" : {

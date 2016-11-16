@@ -6,10 +6,12 @@ library(shinydashboard)
 
 
 inputselection <- c("head","tail")
+ac_data <- read.csv("C:\\Users\\Robbin Berger\\Dropbox\\Hogeschool Rotterdam\\Minor Data Science\\Kwartaal 13\\DataViz\\Individuele opdracht\\AC1908.csv")
+
 
 ui <- dashboardPage(
   
-  header <- dashboardHeader(title = "Plane crash dashboard", dropdownMenu(type =  "messages",
+  header <- dashboardHeader(title = "Plane crash dashboard", titleWidth = 300, dropdownMenu(type =  "messages",
                                                                       messageItem(from = "Sales", message = "Final Case study of Data visualisation course"),
                                                                       messageItem(from = "Auteur", message = "created by Robbin Berger, 0817915")
   )
@@ -26,15 +28,10 @@ ui <- dashboardPage(
     
   ),
   
-  
-  
+ 
   body <- dashboardBody(
     tabItems(
-      # tabItem(tabName = "Home page",
-      #         fluidRow(
-      #           box(title = "Welcome", solidHeader = T, status = "info", "blablablabla", br(), "blablabla", width = 6)
-      #           
-      #         )),
+
       
       tabItem(tabName = "dashboard",
               fluidRow(
@@ -59,36 +56,22 @@ ui <- dashboardPage(
   ),
   
   
-  
   dashboardPage(header, sidebar, body)
   
 )
 
-
-
 server <- function(input, output) {
-  # output$bpOperators <- renderPlot({
-  #  par(mar=c(10,4,1,1))
-  #   barplot(head(sort(table(ac_data$Operator), decreasing = T), n = 10), ylim = c(0,200), col = "gray", las =2, main = 
-  #           "Top 10 crashed operators", xlab = "operators", ylab = "number of crashes", sub = "source: airplane crashes since 1908")
-  #     })
-  # 
-  # output$bpTypes <-renderPlot({
-  #   par(mar=c(10,4,1,1))
-  #   barplot(head(sort(table(ac_data$Type),decreasing = T), n = 10), ylim = c(0,350), col = "lightgray", las = 3, main = 
-  #             "top 10 crashed types of airplanes")
-  # })
-  
-  
+
     output$plot1 <- renderPlot({
       if (input$select1 == "head") {
-      barplot(head(sort(table(ac_data$Operator), decreasing = T), n = input$slider1), ylim = c(0,200), col = "light gray", las =2, main = "Number of crashes per aircraft type", 
-              ylab = "Number of crashes", xlab = "type of aircraft", sub = "source: www.bron.nl")
-      #hier moet nog iets leuks gedaan worden met de par() om de labels goed leesbaar te maken
+      par(mar=c(10,4,1,1))
+      barplot(head(sort(table(ac_data$Operator), decreasing = T), n = input$slider1), ylim = c(0,200), col = "light gray", las =2, main = "Number of crashes per operator", 
+              ylab = "Number of crashes", xlab = "operator", sub = "source: https://goo.gl/aOpm1i")
+      
 
   } else { 
-      barplot(tail(sort(table(ac_data$Operator), decreasing = T), n = input$slider1), ylim = c(0,5), col = "light gray", las =2, main = "Number of crashes per aircraft type", 
-              ylab = "Number of crashes", xlab = "type of aircraft", sub = "source: www.bron.nl")
+      barplot(tail(sort(table(ac_data$Operator), decreasing = T), n = input$slider1), ylim = c(0,5), col = "light gray", las =2, main = "Number of crashes per operator", 
+              ylab = "Number of crashes", xlab = "operator", sub = "source: https://goo.gl/aOpm1i")
       #hier moet nog iets leuks gedaan worden met de par() om de labels goed leesbaar te maken
     }
   })
